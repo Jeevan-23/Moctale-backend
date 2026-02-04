@@ -12,21 +12,20 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 
-
 @Entity
 @Table(name = "content_genres")
 public class ContentGenre {
-	
-	@EmbeddedId
-	private ContentGenreId id;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@MapsId("contentId")
-	@JoinColumn(name = "genre_id")
-	private Content content;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("genreId")
+
+    @EmbeddedId
+    private ContentGenreId id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("contentId")   
+    @JoinColumn(name = "content_id")
+    private Content content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("genreId")     
     @JoinColumn(name = "genre_id")
     private Genre genre;
 }

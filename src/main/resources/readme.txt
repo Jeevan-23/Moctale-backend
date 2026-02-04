@@ -1,7 +1,5 @@
-Database schema
 
 
-1️⃣ ENUM Types (Create FIRST)
 CREATE TYPE user_role AS ENUM (
     'ADMIN',
     'USER'
@@ -25,7 +23,6 @@ CREATE TYPE review_type AS ENUM (
     'PERFECTION'
 );
 
-2️⃣ USERS Table
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -39,7 +36,6 @@ CREATE TABLE users (
 );
 
 
-hi 
 3️⃣ CONTENT Table (Movie / Series / Anime)
 CREATE TABLE content (
     id BIGSERIAL PRIMARY KEY,
@@ -55,13 +51,11 @@ CREATE TABLE content (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-4️⃣ GENRES Table
 CREATE TABLE genres (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE
 );
 
-5️⃣ CONTENT ↔ GENRES (Many-to-Many)
 CREATE TABLE content_genres (
     content_id BIGINT NOT NULL,
     genre_id BIGINT NOT NULL,
@@ -72,13 +66,11 @@ CREATE TABLE content_genres (
         FOREIGN KEY (genre_id) REFERENCES genres(id) ON DELETE CASCADE
 );
 
-6️⃣ PLATFORMS Table
 CREATE TABLE platforms (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE
 );
 
-7️⃣ CONTENT ↔ PLATFORMS (Many-to-Many)
 CREATE TABLE content_platforms (
     content_id BIGINT NOT NULL,
     platform_id BIGINT NOT NULL,
@@ -89,7 +81,6 @@ CREATE TABLE content_platforms (
         FOREIGN KEY (platform_id) REFERENCES platforms(id) ON DELETE CASCADE
 );
 
-8️⃣ REVIEWS Table
 CREATE TABLE reviews (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
@@ -107,7 +98,6 @@ CREATE TABLE reviews (
         UNIQUE (user_id, content_id)
 );
 
-9️⃣ REVIEW LIKES Table
 CREATE TABLE review_likes (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
@@ -121,7 +111,6 @@ CREATE TABLE review_likes (
         UNIQUE (user_id, review_id)
 );
 
-🔟 REVIEW COMMENTS Table
 CREATE TABLE review_comments (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
@@ -135,7 +124,6 @@ CREATE TABLE review_comments (
         FOREIGN KEY (review_id) REFERENCES reviews(id) ON DELETE CASCADE
 );
 
-1️⃣1️⃣ Indexes (Performance-Critical)
 -- Search
 CREATE INDEX idx_content_title ON content(title);
 

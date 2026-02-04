@@ -14,8 +14,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "content")
 public class Content {
 	@Id
@@ -34,7 +38,7 @@ public class Content {
 	
 	private LocalDate releaseDate;
 	
-	@Lob
+//	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "poster_image")
 	private byte[] posterImage;

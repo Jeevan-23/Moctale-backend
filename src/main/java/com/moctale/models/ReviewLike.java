@@ -16,7 +16,7 @@ import jakarta.persistence.UniqueConstraint;
 		name = "review_likes",
 		uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "review_id"})
 )
-public class ReviewLIke {
+public class ReviewLike {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
