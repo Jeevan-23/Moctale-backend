@@ -1,8 +1,6 @@
 package com.moctale.dto;
 
-import java.time.LocalDateTime;
-
-import com.moctale.models.ReviewType;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,13 +11,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewResponse {
+public class UserProfileResponse {
 
     private Long id;
     private String username;
-    private ReviewType reviewType;
-    private String commentText;
-    private long likeCount;
-    private LocalDateTime createdAt;
+    private String bio;
+    List<ReviewResponse> reviews;
 }
-

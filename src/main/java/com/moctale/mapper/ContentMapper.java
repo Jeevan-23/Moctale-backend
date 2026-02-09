@@ -11,7 +11,6 @@ public final class ContentMapper {
 
     private ContentMapper() {}
 
-    // For explore/search page
     public static ContentResponse toResponse(Content content) {
         ContentResponse dto = new ContentResponse();
         dto.setId(content.getId());
@@ -21,7 +20,6 @@ public final class ContentMapper {
         return dto;
     }
 
-    // For detail page
     public static ContentDetailResponse toDetailResponse(
             Content content,
             List<String> genres,

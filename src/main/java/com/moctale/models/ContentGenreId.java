@@ -4,8 +4,10 @@ import java.io.Serializable;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 
 @Embeddable
+@AllArgsConstructor
 public class ContentGenreId implements Serializable {
 
     @Column(name = "content_id")

@@ -78,5 +78,11 @@ public class ReviewServiceImpl implements ReviewService{
 
 	        return distribution;
 	}
+	
+	@Override
+	public List<Review> getReviewsByUser(Long userId) {
+	    return reviewRepository.findByUserId(userId);
+	}
+
 
 }

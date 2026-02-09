@@ -12,4 +12,6 @@ public interface ReviewService {
 	List<Review> getReviewsForContent(Long contentId);
 	
 	Map<ReviewType, Long> getReviewDistribution(Long contentId);
+	
+	List<Review> getReviewsByUser(Long userId);
 }

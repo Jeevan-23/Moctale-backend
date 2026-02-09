@@ -14,7 +14,18 @@ import jakarta.persistence.ManyToOne;
 //import jakarta.persistence.UniqueConstraint;
 
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "review_comments")
 public class ReviewComment {
 	@Id
