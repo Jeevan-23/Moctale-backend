@@ -3,6 +3,8 @@ package com.moctale.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.moctale.models.User;
 import com.moctale.models.Review;
 import com.moctale.models.ReviewComment;
@@ -10,6 +12,8 @@ import com.moctale.repository.ReviewCommentRepository;
 import com.moctale.repository.ReviewRepository;
 import com.moctale.repository.UserRepository;
 
+
+@Service
 public class ReviewCommentServiceImpl implements ReviewCommentService {
 
 	private final ReviewCommentRepository commentRepository;
@@ -44,8 +48,7 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 
 	@Override
 	public List<ReviewComment> getComments(Long reviewId) {
-		// TODO Auto-generated method stub
-		return null;
+		return commentRepository.findByReviewIdOrderByCreatedAtAsc(reviewId);
 	}
 	
 	

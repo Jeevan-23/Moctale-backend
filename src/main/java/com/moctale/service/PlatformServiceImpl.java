@@ -1,8 +1,12 @@
 package com.moctale.service;
 
+import org.springframework.stereotype.Service;
+
 import com.moctale.models.Platform;
 import com.moctale.repository.PlatformRepository;
 
+
+@Service
 public class PlatformServiceImpl implements PlatformService{
 	private final PlatformRepository platformRepository;
 	

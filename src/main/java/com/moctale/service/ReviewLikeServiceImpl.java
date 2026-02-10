@@ -2,6 +2,8 @@ package com.moctale.service;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.moctale.models.Review;
 import com.moctale.models.ReviewLike;
 import com.moctale.models.User;
@@ -9,6 +11,8 @@ import com.moctale.repository.ReviewLikeRepository;
 import com.moctale.repository.ReviewRepository;
 import com.moctale.repository.UserRepository;
 
+
+@Service
 public class ReviewLikeServiceImpl implements ReviewLikeService {
 	
 	private final ReviewLikeRepository reviewLikeRepository;
@@ -54,8 +58,7 @@ public class ReviewLikeServiceImpl implements ReviewLikeService {
 
 	@Override
 	public long getLikecount(Long reviewId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return reviewLikeRepository.countByReviewId(reviewId);
 	}
 	
 	
