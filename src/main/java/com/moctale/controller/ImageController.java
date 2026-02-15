@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,7 @@ public class ImageController {
 	
 //	______________________Content Poster________________________________
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping(value = "/content/{contentId}/poster", 
 			consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<Void> uploadPoster(

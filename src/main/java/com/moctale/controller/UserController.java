@@ -11,6 +11,7 @@ import com.moctale.dto.ProfileUpdateRequest;
 import com.moctale.dto.UserProfileResponse;
 import com.moctale.mapper.UserMapper;
 import com.moctale.models.User;
+import com.moctale.security.SecurityUtils;
 import com.moctale.service.UserService;
 
 import jakarta.validation.Valid;
@@ -30,8 +31,9 @@ public class UserController {
 	}
 	
 	@PutMapping("/{id}")
-	public UserProfileResponse updateProfile(@PathVariable Long id, 
+	public UserProfileResponse updateProfile( 
 			@RequestBody @Valid ProfileUpdateRequest request) {
+		Long id = SecurityUtils.getCurrentUserId();
 		User user = userService.updateProfile(id, request.getBio(),  null);
 		return UserMapper.toProfileResponse(user);
 	}

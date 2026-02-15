@@ -1,4 +1,4 @@
-package com.moctale.service;
+package com.moctale.controller;
 
 import java.util.List;
 
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.moctale.dto.CommentResponse;
 import com.moctale.dto.ReviewCommentRequest;
 import com.moctale.mapper.CommentMapper;
+import com.moctale.security.SecurityUtils;
+import com.moctale.service.ReviewCommentService;
+import com.moctale.service.ReviewLikeService;
 
 import jakarta.validation.Valid;
 
@@ -36,19 +39,21 @@ public class ReviewInteractionController {
 	
 	@PostMapping("/like")
 	public ResponseEntity<Void> likeReview(
-			@PathVariable Long reviewId, 
-			@RequestParam Long userId) {
-		reviewLikeService.likeReview(userId, reviewId);
-		return ResponseEntity.ok().build();
+	        @PathVariable Long reviewId
+	) {
+	    Long userId = SecurityUtils.getCurrentUserId();
+	    reviewLikeService.likeReview(userId, reviewId);
+	    return ResponseEntity.ok().build();
 	}
+
 	
 	@DeleteMapping("/like")
 	public ResponseEntity<Void> unlikeReview(
-            @PathVariable Long reviewId,
-            @RequestParam Long userId
+            @PathVariable Long reviewId
     ) {
-        reviewLikeService.unlikeReview(userId, reviewId);
-        return ResponseEntity.ok().build();
+		Long userId = SecurityUtils.getCurrentUserId();
+	    reviewLikeService.unlikeReview(userId, reviewId);
+	    return ResponseEntity.ok().build();
     }
 	
 //	....................comments......................
@@ -56,9 +61,9 @@ public class ReviewInteractionController {
 	@PostMapping("/comments")
 	public CommentResponse addComment(
             @PathVariable Long reviewId,
-            @RequestParam Long userId,
             @RequestBody @Valid ReviewCommentRequest request
     ) {
+		Long userId = SecurityUtils.getCurrentUserId();
         return CommentMapper.toResponse(
                 reviewCommentService.addComment(
                         userId,

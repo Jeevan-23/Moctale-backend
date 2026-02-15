@@ -1,5 +1,6 @@
 package com.moctale.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,7 @@ public class AdminContentController {
         this.contentPlatformRepository = contentPlatformRepository;
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ContentResponse createContent(
     		@RequestBody @Valid ContentCreateRequest request) {

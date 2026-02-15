@@ -15,6 +15,7 @@ import com.moctale.dto.ReviewResponse;
 import com.moctale.mapper.ReviewMapper;
 import com.moctale.models.Review;
 import com.moctale.repository.ReviewLikeRepository;
+import com.moctale.security.SecurityUtils;
 import com.moctale.service.ReviewService;
 
 import jakarta.validation.Valid;
@@ -34,8 +35,8 @@ public class ReviewController {
 	
 	@PostMapping
 	public ReviewResponse addReview(@PathVariable Long contentId, 
-			@RequestBody @Valid ReviewCreateRequest request,
-			@RequestParam Long userId) {
+			@RequestBody @Valid ReviewCreateRequest request) {
+		Long userId = SecurityUtils.getCurrentUserId();
 		Review review = reviewService.addReview(userId, contentId, request.getReviewType(), request.getComment());
 		long likes = reviewLikeRepository.countByReviewId(review.getId());
 		return ReviewMapper.toResponse(review, likes);
