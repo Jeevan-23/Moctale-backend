@@ -2,8 +2,13 @@ package com.moctale.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.moctale.dto.ContentResponse;
+import com.moctale.mapper.ContentMapper;
 import com.moctale.models.Content;
 import com.moctale.models.ContentType;
 import com.moctale.repository.ContentRepository;
@@ -39,6 +44,21 @@ public class ContentServiceImpl implements ContentService {
 	@Override
 	public List<Content> getByType(ContentType type) {
 		return contentRepository.findByContentType(type);
+	}
+	
+	@Override
+	public Page<ContentResponse> searchAdvanced(
+	        String title,
+	        ContentType type,
+	        String genre,
+	        int page,
+	        int size
+	) {
+	    Pageable pageable = PageRequest.of(page, size);
+
+	    return contentRepository
+	            .searchAdvanced(title, type, genre, pageable)
+	            .map(ContentMapper::toResponse);
 	}
 
 }

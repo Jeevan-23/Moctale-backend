@@ -3,6 +3,7 @@ package com.moctale.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.moctale.mapper.ReviewStatsMapper;
 import com.moctale.models.Content;
 import com.moctale.models.ContentGenre;
 import com.moctale.models.ContentPlatform;
+import com.moctale.models.ContentType;
 import com.moctale.models.ReviewType;
 import com.moctale.repository.ContentGenreRepository;
 import com.moctale.repository.ContentPlatformRepository;
@@ -80,4 +82,22 @@ public class ContentController {
                 content, genres, platforms, stats
         );
     }
+    
+    @GetMapping("/search")
+    public Page<ContentResponse> searchAdvanced(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) ContentType type,
+            @RequestParam(required = false) String genre,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return contentService.searchAdvanced(
+                title,
+                type,
+                genre,
+                page,
+                size
+        );
+    }
+
 }
